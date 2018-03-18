@@ -1,12 +1,15 @@
 {
   "name": "@tslib/argv",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "parse argument for TypeScript",
   "main": "dist/argv.js",
   "types": "src/argv.ts",
   "repository": "git@github.com:mm-ts-lib/argv.git",
   "author": "zhufeng <zhfjyq@163.com>",
   "license": "MIT",
+  "scripts": {
+    "push": "tsc && git push && yarn publish"
+  },
   "devDependencies": {
     "@types/node": "^9.4.7"
   },
