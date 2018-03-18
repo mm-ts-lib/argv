@@ -37,7 +37,7 @@ export default argv(
   {
     cmd: {
       short: null,// 定义short为null，设置cmd为命令参数解析模式
-      desc: 'config directory ,default is ./config',
+      desc: 'default cmd is "run",other:"test","build"',
       value: 'run', // 缺省值
     },
     port: {

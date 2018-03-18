@@ -40,8 +40,8 @@ export default argv(
   `,
   {
     cmd: {
-      short: null, / / ​​Define short is null, set cmd to command parameter parsing mode
-      desc: 'config directory ,default is ./config',
+      short: null, // ​​Define short is null, set cmd to command parameter parsing mode
+      desc: 'default cmd is "run",other:"test","build"',
       value: 'run', // default value
     },
     port: {
