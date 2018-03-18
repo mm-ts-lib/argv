@@ -77,8 +77,7 @@ console.log('boo', cmdline.boo);
 
 ```
 # 其他注意事项
-* import cmdline 为只读对象，防止意外改变
-
+> * import cmdline 为只读对象，防止意外改变变量
 
 
 # @tslib 
