@@ -152,12 +152,19 @@ class CmdLineParser<T> {
     console.log(this._cmdDesc);
 
     // 输出使用说明
-    console.log('Usage:');
+    console.log('Params:');
     const cmdline: any = this._cmdLine;
     Object.keys(cmdline).forEach((cmd) => {
       // short 参数不为空则显示短参数
-      const short = cmdline[cmd].short ? `[-${cmdline[cmd].short}]` : '';
-      console.log(`\t--${cmd} ${short}: ${cmdline[cmd].desc}`);
+      if (cmdline[cmd].short) {
+        console.log(`\t-${cmdline[cmd].short} [ ${cmd} ]: ${cmdline[cmd].desc}`);
+
+      } else {
+        // 命令说明
+        console.log(`COMMAND: ${cmd} : ${cmdline[cmd].desc}`);
+      }
+      // const short = cmdline[cmd].short ? `[-${cmdline[cmd].short}]` : '';
+      // console.log(`\t--${cmd} ${short}: ${cmdline[cmd].desc}`);
     })
 
     if (exit) {
