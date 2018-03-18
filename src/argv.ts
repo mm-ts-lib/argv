@@ -121,7 +121,6 @@ class CmdLineParser<T> {
         } else {
           // 解析为上一个参数的值
           if (cmdline[this._lastArg]) {
-            console.log('------!!', this._lastArg, arg);
             cmdline[this._lastArg].value = this._getValue(cmdline[this._lastArg].value, arg);
           } else {
             this.printHelp('Parse CmdLine Error:' + this._lastArg + "," + arg, true);

@@ -90,7 +90,6 @@ class CmdLineParser {
                 }
                 else {
                     if (cmdline[this._lastArg]) {
-                        console.log('------!!', this._lastArg, arg);
                         cmdline[this._lastArg].value = this._getValue(cmdline[this._lastArg].value, arg);
                     }
                     else {
