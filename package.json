@@ -1,6 +1,6 @@
 {
   "name": "argv",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "parse argument for TypeScript",
   "main": "src/argv.ts",
   "repository": "git@github.com:mm-ts-lib/argv.git",
