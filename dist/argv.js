@@ -118,7 +118,7 @@ class CmdLineParser {
         const cmdline = this._cmdLine;
         Object.keys(cmdline).forEach((cmd) => {
             if (cmdline[cmd].short) {
-                console.log(`\t-${cmdline[cmd].short} [ ${cmd} ]: ${cmdline[cmd].desc}`);
+                console.log(`\t-${cmdline[cmd].short} [ --${cmd} ]: ${cmdline[cmd].desc}`);
             }
             else {
                 console.log(`COMMAND: ${cmd} : ${cmdline[cmd].desc}`);

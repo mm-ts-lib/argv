@@ -8,7 +8,7 @@
   "author": "zhufeng <zhfjyq@163.com>",
   "license": "MIT",
   "scripts": {
-    "push": "tsc && git push && yarn publish"
+    "push": "git push && yarn publish"
   },
   "devDependencies": {
     "@types/node": "^9.4.7"
