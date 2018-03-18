@@ -1,38 +1,3 @@
-
-/**
- * @fileOverview
- * 定义命令行解析配置
- * 各个业务模块可以导入本文件，获取需要的命令行配置
- * 使用：import cmdLine from '../cmdLine'
- * 
- * 命令行参数解析说明:
- * xxx-program [cmd] -arg1 xxx -arg2 1 --arg3-long 111 222 333 444 -arg4 
- * 1. 命令参数:
- *    解析：在第一个"-"之前的所有参数，合并为空格分割字符串
- *    定义：short为空的参数将被设置为此参数，不能有多个short为空的命令定义
- * 2. 参数分割：
- *    两个以 '-' 为起始的参数 之间所有字符，去除左右的空格和\"引号，作为第一个参数的值
- *    即 arg3-long 的值为字符串 "111 222 333 444"
- * 3. 命令：
- *    命令为第一个不带 “-” 的参数
- *    命令定义映射名称：command
- * 
- * 定义文件写法：
-
-export default _.mapValues(new CmdLineParser(`
-Frame3 server
-using: 'mmod frame3Server.mod [-c configDir] [-p port]' 
-`, {
-    conf: {
-      short: 'c',
-      desc: 'config directory ,default is ./config',
-      value: '', // 缺省值
-    }
-  }).parse(), o => o.value);
-
- */
-
-
 import process = require('process');
 
 class CmdLineParser<T> {
@@ -92,7 +57,6 @@ class CmdLineParser<T> {
 
   _setLastArg(arg: string): void {
     const cmdline: any = this._cmdLine;
-    debugger;
     // 如果是 bool 类型的参数，直接设置为true
     if (typeof cmdline[arg].value === 'boolean') {
       cmdline[arg].value = true;
@@ -107,6 +71,11 @@ class CmdLineParser<T> {
   parse(): T {
     // 遍历所有参数，检测是否是参数定义，检测是长参数还是短参数
     const cmdline: any = this._cmdLine;
+    // 检测命令参数
+    const commandArg = Object.keys(cmdline).find(function (key: any) {
+      return cmdline[key].short === null;
+    })
+
     // debugger;
     process.argv.forEach((arg, i) => {
       // 跳过参数 0,1
@@ -133,20 +102,11 @@ class CmdLineParser<T> {
       } else {
         // 第一个命令或者是上一个参数的值
         if (this._lastArg === null) {
-          // 第一个无 “-” 的参数，为命令参数
-          if (cmdline['command']) {
-            // 设置命令参数
-            if (cmdline['command'].value) {
-              // 多个命令，不支持
-              this.printHelp('Not Support Multi Command:' + arg + ',' + cmdline['command'], true);
-            } else {
-              // 设置命令的值
-              cmdline['command'].value = arg;
-            }
+          if (!commandArg) {
+            // 如果未设置命令参数则报错
+            this.printHelp('Not Need Command Param:', true);
           } else {
-            // 打印错误
-            this.printHelp('Invalid Command:' + arg, true);
-            process.exit(1);
+            cmdline[commandArg].value = arg;
           }
         } else {
           // 解析为上一个参数的值
@@ -161,7 +121,7 @@ class CmdLineParser<T> {
 
     // 检测是否是缺省命令,--help 或者 --version，执行缺省命令并退出
     if (cmdline.version.value) {
-      console.log(this._progName + ':' + this._progVersion);
+      console.log(this._progName + ' v' + this._progVersion);
       process.exit(1);
     } else if (cmdline.help.value) {
       this.printHelp(undefined, true);
@@ -174,8 +134,8 @@ class CmdLineParser<T> {
     if (err) {
       console.log("ERROR:" + err);
     }
-    // 输出版本信息
-    console.log(this._progName + ':' + this._progVersion);
+    // 输出版本
+    console.log(this._progName + ' v' + this._progVersion);
 
     // 输出命令简介
     console.log(this._cmdDesc);
@@ -185,7 +145,7 @@ class CmdLineParser<T> {
     const cmdline: any = this._cmdLine;
     Object.keys(cmdline).forEach((cmd) => {
       // short 参数不为空则显示短参数
-      const short = cmdline[cmd].short.length > 0 ? `[-${cmdline[cmd].short}]` : '';
+      const short = cmdline[cmd].short ? `[-${cmdline[cmd].short}]` : '';
       console.log(`\t--${cmd} ${short}: ${cmdline[cmd].desc}`);
     })
 
@@ -198,7 +158,7 @@ class CmdLineParser<T> {
 //定义映射value类型
 type ICmdItem = {
   [k: string]: {
-    short: string,
+    short: string | null,
     value: string | number | boolean,
     desc: string
   }

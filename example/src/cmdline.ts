@@ -1,17 +1,21 @@
-import argv from '../../src/argv';
+import argv from './argv';
+
+import pkg = require('../package.json');
 
 /**
  * 导出解析后的命令行
  */
 export default argv(
-  'example',
-  '1.0.0',
-  `'mmod frame3Server.mod [-c configDir] [-p port]'`,
+  pkg.name,
+  pkg.version,
+  `  Example using for Test ts argv library
+  you can using: "${pkg.name} [cmd] params ..." to test it
+  `,
   {
-    conf: {
-      short: 'c',
+    cmd: {
+      short: null,
       desc: 'config directory ,default is ./config',
-      value: './config', // 缺省值
+      value: 'run', // 缺省值
     },
     port: {
       short: 'p',
