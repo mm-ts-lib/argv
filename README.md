@@ -14,6 +14,7 @@
 * Clean and very simple code with no more than 200 lines of comments
 * Independent code, no third-party dependent libraries?
 * Convenient reference
+* Example ts project in /example directory
 
 # Install
 
