@@ -76,8 +76,10 @@ console.log('port', cmdline.port);
 console.log('boo', cmdline.boo);
 
 ```
+# 其他注意事项
+* import cmdline 为只读对象，防止意外改变
 
-import cmdline from './cmdline';
+
 
 # @tslib 
 > TypeScript全栈开发库，致力于全部类型化的前后端组件开发
