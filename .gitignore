@@ -5,8 +5,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 yarn.lock
-./dist
-./example/dist
+dist
+example/dist
 # Runtime data
 pids
 *.pid
