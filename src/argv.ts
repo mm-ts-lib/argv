@@ -55,15 +55,25 @@ class CmdLineParser<T> {
     return null;
   }
 
-  _setLastArg(arg: string): void {
-    const cmdline: any = this._cmdLine;
-    // 如果是 bool 类型的参数，直接设置为true
-    if (typeof cmdline[arg].value === 'boolean') {
-      cmdline[arg].value = true;
-    } else {
-      // 设置lastArg名称
-      this._lastArg = arg;
+  private _getValue<T1>(valType: T1, val: string): T1 {
+    let a: any = val;
+    if (typeof valType === 'number') {
+      a = Number(val);
+    } else if (typeof valType === 'boolean') {
+      a = !['false', '0', 'null'].includes(val.toLowerCase());
     }
+    return a;
+  }
+
+  private _setLastArg(arg: string): void {
+    const cmdline: any = this._cmdLine;
+    this._lastArg = arg;
+    // 如果是 bool 类型的参数，直接设置为true
+    // if (typeof cmdline[arg].value === 'boolean') {
+    //   cmdline[arg].value = true;
+    // } else {
+    //   // 设置lastArg名称
+    // }
   }
 
   // 公有函数
@@ -111,7 +121,8 @@ class CmdLineParser<T> {
         } else {
           // 解析为上一个参数的值
           if (cmdline[this._lastArg]) {
-            cmdline[this._lastArg].value = arg;
+            console.log('------!!', this._lastArg, arg);
+            cmdline[this._lastArg].value = this._getValue(cmdline[this._lastArg].value, arg);
           } else {
             this.printHelp('Parse CmdLine Error:' + this._lastArg + "," + arg, true);
           }

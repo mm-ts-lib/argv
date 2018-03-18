@@ -78,6 +78,7 @@ console.log('boo', cmdline.boo);
 ```
 # 其他注意事项
 > * import cmdline 为只读对象，防止意外改变变量
+> * boolean 类型参数接收: null,0,false为 false值，其他为true
 
 
 # @tslib 

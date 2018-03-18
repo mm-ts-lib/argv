@@ -25,7 +25,7 @@ export default argv(
     boo: {
       short: 'b',
       desc: 'service listen port,default:3000',
-      value: true, // 缺省值      
+      value: false, // 缺省值      
     }
   }
 );
