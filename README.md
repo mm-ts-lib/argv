@@ -2,55 +2,88 @@
 
 [中文说明](./README.cn.md)
 
-TypeScript Parse Argument Cmd Line
+# @tslib/argv
 
+## minimalist TypeScript command line parsing library
 
-* full code hint
-* full typed, all cmdline param have 
-* very sample, no third dependencies
+* Complete code hinting and type resolution
+* Supports standard command line syntax: program run -p 9000 -h 127.0.0.1
+* Supports long and short parameters, such as: "-p" or "--port"
+* The command and all parameters support default values
+* Automatically generate help information
+* Clean and very simple code with no more than 200 lines of comments
+* Independent code, no third-party dependent libraries?
+* Convenient reference
 
-# install
+# Install
 
+```bash
+  yarn add @tslib/argv
 ```
-  yarn add @tslib/argv
-```
 
-# usage
-```
-
-```
-
+# Instructions
+## 1. Introducing argv library
+> 1. Add the command line definition file: "cmdline.ts"
+```typescript
+import argv from '@tslib/argv';
+// Automatically import version information, it can also be manually defined
+import pkg = require('../package.json');
 
 /**
- * @fileOverview
- * 定义命令行解析配置
- * 各个业务模块可以导入本文件，获取需要的命令行配置
- * 使用：import cmdLine from '../cmdLine'
- * 
- * 命令行参数解析说明:
- * xxx-program [cmd] -arg1 xxx -arg2 1 --arg3-long 111 222 333 444 -arg4 
- * 1. 命令参数:
- *    解析：在第一个"-"之前的所有参数，合并为空格分割字符串
- *    定义：short为空的参数将被设置为此参数，不能有多个short为空的命令定义
- * 2. 参数分割：
- *    两个以 '-' 为起始的参数 之间所有字符，去除左右的空格和\"引号，作为第一个参数的值
- *    即 arg3-long 的值为字符串 "111 222 333 444"
- * 3. 命令：
- *    命令为第一个不带 “-” 的参数
- *    命令定义映射名称：command
- * 
- * 定义文件写法：
+ * Export the parsed command line
+ */
+export default argv(
+  pkg.name,
+  pkg.version,
+  ` Example using for Test ts argv library
+  You can using: "${pkg.name} [cmd] params ..." to test it
+  `,
+  {
+    cmd: {
+      short: null, / / ​​Define short is null, set cmd to command parameter parsing mode
+      desc: 'config directory ,default is ./config',
+      value: 'run', // default value
+    },
+    port: {
+      short: 'p',
+      desc: 'service listen port,default:3000',
+      value: 3000, // default value
+    },
+    boo: {
+      short: 'b',
+      desc: 'service listen port,default:3000',
+      value: true, // default value
+    }
+  }
+);
 
-export default _.mapValues(new CmdLineParser(`
-Frame3 server
-using: 'mmod frame3Server.mod [-c configDir] [-p port]' 
-`, {
-    conf: {
-      short: 'c',
-      desc: 'config directory ,default is ./config',
-      value: '', // 缺省值
-    }
-  }).parse(), o => o.value);
+```
 
- */
+## 2. Create a .json import file definition [optional].
+> jsonImport.ts added to the project source file directory, without using import import
+```typescript
+declare module "*.json" {
+  const value: any;
+  export = value;
+}
 
+```
+
+## 3. Using Command Line Parameters
+>
+```typescript
+
+import cmdline from './cmdline';
+
+console.log('cmd', cmdline.cmd);
+console.log('port', cmdline.port);
+console.log('boo', cmdline.boo);
+
+```
+# Other notes
+> * import cmdline is a read-only object that prevents accidental changes to variables
+> * boolean type parameter receives  'null', '0', 'false', as false, others are true
+
+
+# @tslib
+> TypeScript full stack development library, dedicated to all types of front and back end component development
