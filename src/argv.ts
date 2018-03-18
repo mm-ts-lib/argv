@@ -178,7 +178,5 @@ export default function <T extends ICmdItem>(progName: string, progVersion: stri
     parsed[key] = parsed[key].value;
   });
   return parsed;
-
-  // return mapCmdLine;
 }
 
