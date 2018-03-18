@@ -24,7 +24,7 @@ class CmdLineParser {
         const cmdline = this._cmdLine;
         cmdline['help'] = {
             short: 'h',
-            desc: 'show current version',
+            desc: 'show help message',
             value: false,
         };
     }

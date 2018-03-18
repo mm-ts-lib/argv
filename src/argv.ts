@@ -34,7 +34,7 @@ class CmdLineParser<T> {
     const cmdline: any = this._cmdLine;
     cmdline['help'] = {
       short: 'h',
-      desc: 'show current version',
+      desc: 'show help message',
       value: false, // 缺省值
     }
   }
