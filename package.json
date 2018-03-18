@@ -1,8 +1,8 @@
 {
   "name": "@tslib/argv",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "parse argument for TypeScript",
-  "main": "src/argv.ts",
+  "main": "src/index.ts",
   "repository": "git@github.com:mm-ts-lib/argv.git",
   "author": "zhufeng <zhfjyq@163.com>",
   "license": "MIT",

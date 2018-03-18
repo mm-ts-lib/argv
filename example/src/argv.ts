@@ -1,1 +1,1 @@
-../../src/argv.ts
+../../index.ts
