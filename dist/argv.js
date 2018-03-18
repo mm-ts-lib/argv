@@ -114,11 +114,15 @@ class CmdLineParser {
         }
         console.log(this._progName + ' v' + this._progVersion);
         console.log(this._cmdDesc);
-        console.log('Usage:');
+        console.log('Params:');
         const cmdline = this._cmdLine;
         Object.keys(cmdline).forEach((cmd) => {
-            const short = cmdline[cmd].short ? `[-${cmdline[cmd].short}]` : '';
-            console.log(`\t--${cmd} ${short}: ${cmdline[cmd].desc}`);
+            if (cmdline[cmd].short) {
+                console.log(`\t-${cmdline[cmd].short} [ ${cmd} ]: ${cmdline[cmd].desc}`);
+            }
+            else {
+                console.log(`COMMAND: ${cmd} : ${cmdline[cmd].desc}`);
+            }
         });
         if (exit) {
             process.exit(1);

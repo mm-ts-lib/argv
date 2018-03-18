@@ -157,7 +157,7 @@ class CmdLineParser<T> {
     Object.keys(cmdline).forEach((cmd) => {
       // short 参数不为空则显示短参数
       if (cmdline[cmd].short) {
-        console.log(`\t-${cmdline[cmd].short} [ ${cmd} ]: ${cmdline[cmd].desc}`);
+        console.log(`\t-${cmdline[cmd].short} [ --${cmd} ]: ${cmdline[cmd].desc}`);
 
       } else {
         // 命令说明
