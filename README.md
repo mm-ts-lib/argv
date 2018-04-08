@@ -23,7 +23,7 @@
 ```
 
 # using
-* see directory: '/test'
+* see directory: '/src/test'
 
 
 # Instructions

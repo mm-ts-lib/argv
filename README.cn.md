@@ -18,7 +18,7 @@
   yarn add @tslib/argv
 ```
 # 参考:
-* 参见目录: '/test'
+* 参见目录: '/src/test'
 
 # 引用
 ## 1. 引入argv库

@@ -1,5 +1,5 @@
-import argv from '../src/argv';
-import pkg from '../package.json';
+import argv from '../argv';
+import pkg from '../../package.json';
 
 /**
  * 导出解析后的命令行
