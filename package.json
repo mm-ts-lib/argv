@@ -1,6 +1,6 @@
 {
   "name": "@tslib/argv",
-  "version": "1.0.15",
+  "version": "1.0.19",
   "description": "parse argument for TypeScript",
   "main": "dist/argv.js",
   "types": "src/argv.ts",

@@ -69,11 +69,9 @@ class CmdLineParser<T> {
     const cmdline: any = this._cmdLine;
     this._lastArg = arg;
     // 如果是 bool 类型的参数，直接设置为true
-    // if (typeof cmdline[arg].value === 'boolean') {
-    //   cmdline[arg].value = true;
-    // } else {
-    //   // 设置lastArg名称
-    // }
+    if (typeof cmdline[arg].value === 'boolean') {
+      cmdline[arg].value = true;
+    }
   }
 
   // 公有函数
@@ -135,6 +133,7 @@ class CmdLineParser<T> {
       process.exit(1);
     } else if (cmdline.help.value) {
       this.printHelp(undefined, true);
+      process.exit(1);
     }
 
     return this._cmdLine;
