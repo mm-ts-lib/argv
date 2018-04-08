@@ -1,4 +1,4 @@
-import process = require('process');
+import process from 'process';
 
 class CmdLineParser<T> {
   // 私有成员

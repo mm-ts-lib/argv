@@ -17,8 +17,10 @@
 ```bash
   yarn add @tslib/argv
 ```
+# 参考:
+* 参见目录: '/test'
 
-# 使用方法
+# 引用
 ## 1. 引入argv库
 > 1. 添加命令行定义文件："cmdline.ts"
 ```typescript
