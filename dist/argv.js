@@ -170,7 +170,13 @@ function default_1(progName, progVersion, desc, define) {
     //   .parse(), o => o.value);
     const parsed = new CmdLineParser(progName, progVersion, desc, define).parse();
     Object.keys(parsed).map(function (key, index) {
-        parsed[key] = parsed[key].value;
+        const envValue = process_1.default.env[key.toUpperCase()];
+        if (envValue) {
+            parsed[key] = envValue;
+        }
+        else {
+            parsed[key] = parsed[key].value;
+        }
     });
     return parsed;
 }

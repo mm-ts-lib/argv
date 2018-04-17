@@ -181,7 +181,7 @@ type ICmdItem = {
 };
 
 // 从原始对象定义中组织新对象
-type IValue<T extends ICmdItem> = {[P in keyof T]: T[P]['value']};
+type IValue<T extends ICmdItem> = { [P in keyof T]: T[P]['value'] };
 
 // 导出映射对象，
 export default function <T extends ICmdItem>(progName: string, progVersion: string, desc: string, define: T)
@@ -191,8 +191,15 @@ export default function <T extends ICmdItem>(progName: string, progVersion: stri
   //   .parse(), o => o.value);
   const parsed: any = new CmdLineParser(progName, progVersion, desc, define).parse();
   Object.keys(parsed).map(function (key, index) {
-    parsed[key] = parsed[key].value;
+    const envValue = process.env[key.toUpperCase()];
+    if (envValue) {
+      parsed[key] = envValue;
+    } else {
+      parsed[key] = parsed[key].value;
+    }
   });
+
+
   return parsed;
 }
 
